@@ -11,8 +11,7 @@ const prefetches = [
   'react-dnd-html5-backend/lib/index.js',
   'react-dnd/lib/index.js',
   'joi/lib/index.js',
-  'redux-form/lib/index.js',
-  'material-ui/lib/raised-button.js'
+  'redux-form/lib/index.js'
 ];
 const prefetchPlugins = prefetches.map(specifier => new webpack.PrefetchPlugin(specifier));
 
@@ -66,6 +65,15 @@ export default {
         test: /\.js$/,
         loader: 'babel',
         include: serverInclude
+      },
+      {
+        test: /(\.scss|\.css)$/,
+        include: /(node_modules)\/react-toolbox/,
+        loaders: [
+          'style',
+          'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass?sourceMap'
+        ]
       }
     ]
   }
