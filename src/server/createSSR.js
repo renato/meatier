@@ -42,8 +42,6 @@ export default async function createSSR(req, res) {
       } else if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        // just look away, this is ugly & wrong https://github.com/callemall/material-ui/pull/2172
-        GLOBAL.navigator = {userAgent: req.headers['user-agent']};
         renderApp(res, store, assets, renderProps);
       } else {
         res.status(404).send('Not found');
